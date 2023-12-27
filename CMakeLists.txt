@@ -28,8 +28,6 @@ endforeach()
 
 add_executable(test ${download_binaries})
 
-add_subdirectory(${USER_LIB})
-
 target_link_libraries(test ${variables_list})
 
 add_test(NAME test_lib COMMAND test_lib)
