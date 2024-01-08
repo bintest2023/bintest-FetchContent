@@ -1,3 +1,5 @@
+# New version of our CMakeLists.txt
+
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/bin)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_DEBUG ${CMAKE_CURRENT_SOURCE_DIR}/bin.dbg)
 set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELEASE ${CMAKE_CURRENT_SOURCE_DIR}/bin.rel)
@@ -36,18 +38,18 @@ endforeach()
 set(unique_target_names)
 
 foreach(variable ${variables_list})
-     # Находим индекс первого вхождения подстроки "rational"
+     # Find the index of the first occurrence of the substring "rational"
      string(FIND ${variable} "rational" substring_index)
 
-     # Находим индекс первого вхождения подстроки "arrayd"
+     # Find the index of the first occurrence of the substring "array"
     string(FIND ${variable} "arrayd" substring_index_arrayd)
 
-     # Если подстрока найдена и еще не добавлена в уникальный список, добавляем ее
+     # If a substring is found and has not yet been added to the unique list, add it
      if(NOT ${substring_index} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";${variable};")
          list(APPEND unique_target_names "rational")
      endif()
 
-     # Если подстрока "arrayd" найдена и еще не добавлена в уникальный список, добавляем ее
+     # If the substring "arrayd" is found and has not yet been added to the unique list, add it
     if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";arrayd;")
     list(APPEND unique_target_names "arrayd")
 endif()
