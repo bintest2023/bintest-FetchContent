@@ -61,8 +61,6 @@ endforeach()
 # Remove duplicates in unique_target_names
 list(REMOVE_DUPLICATES unique_target_names)
 
-list(LENGTH download_binaries CMAKE_LIST_LENGTH)
-
 # Do executable every binary file
 foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 1)
 
