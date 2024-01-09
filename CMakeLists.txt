@@ -7,7 +7,7 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_CURRENT_SOURCE_DIR}/bi
 
 set(bintest https://github.com/bintest2023)
 set(download_binaries)
- 
+
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective)
 
 foreach(variable ${variables_list})
@@ -60,14 +60,32 @@ endforeach()
 list(REMOVE_DUPLICATES unique_target_names)
 
 # Do executable every binary file
-foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} -1)
+foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
 
     list(GET download_binaries ${index} binary)
     get_filename_component(executable_name ${binary} NAME_WE)
-    
-    add_executable(binary_executable${index} ${binary})
 
-    target_link_libraries(binary_executable${index} ${unique_target_names})
+    # Checking whether the current .o file is necessary for linking libraries
+    
+    if(${binary} STREQUAL "rational_stdout_stderr_test.cpp.o")
+
+        # Find Catch2-lib 
+        find_package(Catch2 QUIET)
+
+        if(NOT Catch2_FOUND)
+
+                message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
+        endif()
+
+        add_executable(binary_executable${index} ${binary})
+        target_link_libraries(binary_executable${index} ${unique_target_names} Catch2::Catch2 Catch2::Catch2WithMain)
+
+    else()
+
+        add_executable(binary_executable${index} ${binary})
+        target_link_libraries(binary_executable${index} ${unique_target_names})
+
+    endif()
 
 endforeach()
 
