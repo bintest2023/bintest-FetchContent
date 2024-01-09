@@ -1,4 +1,4 @@
-Instruction manual
+## Instruction manual
 
 1) Copy this code to your CMakeLists.txt
 
