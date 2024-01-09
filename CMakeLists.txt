@@ -77,7 +77,7 @@ foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
         endif()
 
         add_executable(binary_executable${index} ${binary})
-        target_link_libraries(binary_executable${index} ${unique_target_names} Catch2::Catch2 Catch2::Catch2WithMain)
+        target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names} )
 
     else()
 
