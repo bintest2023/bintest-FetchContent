@@ -62,7 +62,7 @@ endforeach()
 list(REMOVE_DUPLICATES unique_target_names)
 
 # Do executable every binary file
-foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
+foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 1)
 
     list(GET download_binaries ${index} binary)
     get_filename_component(executable_name ${binary} NAME_WE)
