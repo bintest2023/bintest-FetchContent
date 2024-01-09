@@ -26,7 +26,7 @@ string(FIND ${variable} "_stdout_stderr" substring_index)
 
 message(${file_url})
 message(${destination})
- 
+
 # checking if required binary file exists otherwise we download it from git
 if(EXISTS ${destination})
     message("-- ${binary_file} has been already downloaded")
@@ -69,7 +69,7 @@ foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
 
     # Checking whether the current .o file is necessary for linking libraries
     
-    if(${binary} STREQUAL "rational_stdout_stderr_test.cpp.o")
+    if(${executable_name} STREQUAL "rational_stdout_stderr_test.cpp.o")
 
         if(NOT Catch2_FOUND)
 
