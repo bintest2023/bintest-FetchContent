@@ -2,6 +2,7 @@ Instruction manual
 
 1) Copy this code to your CMakeLists.txt
 
+```
 include(FetchContent)
 
 FetchContent_Declare(
@@ -14,6 +15,11 @@ FetchContent_Declare(
 set(variables_list ...) # list of tests wich you want to download 
 
 include(${CMAKE_SOURCE_DIR}/build/_deps/bintest-fetchcontent-src/CmakeLists.txt)
+
+
+# List if tests
+# rational arrayD rational_stdout_stderr
+```
 
 2) Instead of "..." add the names of the tests you want to install.
 
