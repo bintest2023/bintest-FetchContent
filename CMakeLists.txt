@@ -60,12 +60,15 @@ endforeach()
 list(REMOVE_DUPLICATES unique_target_names)
 
 # Do executable every binary file
-foreach(binary ${download_binaries})
+foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} -1)
 
-    add_executable(bintest ${binary})
+    list(GET download_binaries ${index} binary)
+    get_filename_component(executable_name ${binary} NAME_WE)
+    
+    add_executable(binary_executable${index} ${binary})
+
+    target_link_libraries(binary_executable${index} ${unique_target_names})
 
 endforeach()
-
-target_link_libraries(bintest ${unique_target_names})
 
 add_test(NAME test_lib COMMAND test_lib)
