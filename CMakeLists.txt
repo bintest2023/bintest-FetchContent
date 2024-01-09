@@ -62,10 +62,10 @@ list(REMOVE_DUPLICATES unique_target_names)
 # Do executable every binary file
 foreach(binary ${download_binaries})
 
-    add_executable(test ${binary})
+    add_executable(bintest ${binary})
 
 endforeach()
 
-target_link_libraries(test ${unique_target_names})
+target_link_libraries(bintest ${unique_target_names})
 
 add_test(NAME test_lib COMMAND test_lib)
