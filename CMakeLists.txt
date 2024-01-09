@@ -70,7 +70,7 @@ foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
     if(${binary} STREQUAL "rational_stdout_stderr_test.cpp.o")
 
         # Find Catch2-lib 
-        find_package(Catch2 QUIET)
+        find_package(Catch2 CONFIG REQUIRED)
 
         if(NOT Catch2_FOUND)
 
