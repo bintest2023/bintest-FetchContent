@@ -10,6 +10,8 @@ set(download_binaries)
 
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective)
 
+find_package(Catch2 CONFIG REQUIRED)
+
 foreach(variable ${variables_list})
 
 string(FIND ${variable} "_stdout_stderr" substring_index)
@@ -68,9 +70,6 @@ foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
     # Checking whether the current .o file is necessary for linking libraries
     
     if(${binary} STREQUAL "rational_stdout_stderr_test.cpp.o")
-
-        # Find Catch2-lib 
-        find_package(Catch2 CONFIG REQUIRED)
 
         if(NOT Catch2_FOUND)
 
