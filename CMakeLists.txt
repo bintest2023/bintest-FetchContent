@@ -69,22 +69,22 @@ foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 0)
 
     # Checking whether the current .o file is necessary for linking libraries
     
-    if(${executable_name} STREQUAL "rational_stdout_stderr_test.cpp.o")
+    # if(${executable_name} STREQUAL "rational_stdout_stderr_test.cpp.o")
 
-        if(NOT Catch2_FOUND)
+        # if(NOT Catch2_FOUND)
 
-                message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
-        endif()
+                # message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
+        # endif()
 
         add_executable(binary_executable${index} ${binary})
         target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names} )
 
-    else()
+    # else()
 
-        add_executable(binary_executable${index} ${binary})
-        target_link_libraries(binary_executable${index} ${unique_target_names})
+        # add_executable(binary_executable${index} ${binary})
+        # target_link_libraries(binary_executable${index} ${unique_target_names})
 
-    endif()
+    # endif()
 
 endforeach()
 
