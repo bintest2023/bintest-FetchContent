@@ -7,7 +7,6 @@ set(CMAKE_RUNTIME_OUTPUT_DIRECTORY_RELWITHDEBINFO ${CMAKE_CURRENT_SOURCE_DIR}/bi
 
 set(bintest https://github.com/bintest2023)
 set(download_binaries)
-add_definitions(-DPRJROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 
 # Make directory for download_binaries
 file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective) 
