@@ -14,8 +14,8 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective)
 # Получаем архитектуру
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm*")
     set(ARCHITECTURE "arm64")
-elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "amd64")
-    set(ARCHITECTURE "amd64")
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64")
+    set(ARCHITECTURE "AMD64")
 else()
     set(ARCHITECTURE "${CMAKE_SYSTEM_PROCESSOR}")
 endif()
@@ -39,7 +39,7 @@ message("Система пользователя: ${FULL_SYSTEM_NAME}")
 
 
 
-if(${FULL_SYSTEM_NAME} STREQUAL "amd64-windows-gnu") 
+if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu") 
 
     # Загружаем .o файл с точкой входа для Windows
     set(main_file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/main.cpp.lib")
@@ -70,7 +70,7 @@ else()
 endif()  
 
 
-if(${FULL_SYSTEM_NAME} STREQUAL "amd64-windows-gnu")
+if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
 
     foreach(variable ${variables_list})
 
@@ -233,7 +233,7 @@ foreach(binary IN LISTS download_binaries)
     get_filename_component(executable_name ${binary} NAME_WE)
 
     # Checking whether the current .o file is necessary for linking libraries
-    if()
+    if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
 
         if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
             find_package(Catch2 CONFIG REQUIRED)
