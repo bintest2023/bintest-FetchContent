@@ -9,17 +9,45 @@ set(bintest https://github.com/bintest2023)
 set(download_binaries)
 add_definitions(-DPRJROOT="${CMAKE_CURRENT_SOURCE_DIR}")
 
-file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective)
+# Make directory for download_binaries
+file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective) 
+
+# Получаем архитектуру
+if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm*")
+    set(ARCHITECTURE "arm64")
+elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "amd64")
+    set(ARCHITECTURE "amd64")
+else()
+    set(ARCHITECTURE "${CMAKE_SYSTEM_PROCESSOR}")
+endif()
+
+# Получаем операционную систему
+if(CMAKE_SYSTEM_NAME STREQUAL "Darwin")
+    set(OPERATING_SYSTEM "apple-darwin")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Linux")
+    set(OPERATING_SYSTEM "linux-gnu")
+elseif(CMAKE_SYSTEM_NAME STREQUAL "Windows")
+    set(OPERATING_SYSTEM "windows-gnu")
+else()
+    set(OPERATING_SYSTEM "${CMAKE_SYSTEM_NAME}")
+endif()
+
+# Формируем строковый идентификатор
+set(FULL_SYSTEM_NAME "${ARCHITECTURE}-${OPERATING_SYSTEM}")
+
+# Используем полученный идентификатор
+# message("Система пользователя: ${FULL_SYSTEM_NAME}")
+
 
 foreach(variable ${variables_list})
 
 string(FIND ${variable} "_stdout_stderr" substring_index)
 
     if(NOT ${substring_index} EQUAL -1)
-        set(file_url "${bintest}/test-binaries/raw/main/${CMAKE_HOST_SYSTEM_NAME}/${variable}_test.cpp.o")
+        set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.cpp.o")
         set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.cpp.o")
     else()
-        set(file_url "${bintest}/test-binaries/raw/main/${CMAKE_HOST_SYSTEM_NAME}/${variable}_test.cpp.o")
+        set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.cpp.o")
         set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.cpp.o")
     endif()
 
