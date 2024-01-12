@@ -35,7 +35,7 @@ endif()
 set(FULL_SYSTEM_NAME "${ARCHITECTURE}-${OPERATING_SYSTEM}")
 
 # Используем полученный идентификатор
-# message("Система пользователя: ${FULL_SYSTEM_NAME}")
+ message("Система пользователя: ${FULL_SYSTEM_NAME}")
 
 
 foreach(variable ${variables_list})
@@ -88,33 +88,52 @@ endforeach()
 list(REMOVE_DUPLICATES unique_target_names)
 
 # Do executable every binary file
-foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 1)
+# foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 1)
 
-    list(GET download_binaries ${index} binary)
+#     list(GET download_binaries ${index} binary)
+#     get_filename_component(executable_name ${binary} NAME_WE)
+
+#     # Checking whether the current .o file is necessary for linking libraries
+    
+#     if(${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o") 
+
+#         find_package(Catch2 CONFIG REQUIRED)
+
+#         if(NOT Catch2_FOUND)
+
+#                 message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
+
+#         endif()
+
+#         add_executable(binary_executable${index} ${binary})
+#         target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names} )
+
+#     else()
+
+#         add_executable(binary_executable${index} ${binary})
+#         target_link_libraries(binary_executable${index} ${unique_target_names})
+
+#     endif()
+
+# endforeach()
+
+foreach(binary IN LISTS download_binaries)
+
     get_filename_component(executable_name ${binary} NAME_WE)
 
     # Checking whether the current .o file is necessary for linking libraries
-    
-    if(${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o") 
-
+    if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
         find_package(Catch2 CONFIG REQUIRED)
 
         if(NOT Catch2_FOUND)
-
-                message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
-
+            message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
         endif()
-
-        add_executable(binary_executable${index} ${binary})
-        target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names} )
-
-    else()
-
-        add_executable(binary_executable${index} ${binary})
-        target_link_libraries(binary_executable${index} ${unique_target_names})
-
     endif()
 
+    add_executable(binary_executable${index} ${binary})
+    target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
+
 endforeach()
+
 
 add_test(NAME test_lib COMMAND test_lib)
