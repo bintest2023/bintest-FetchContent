@@ -15,7 +15,7 @@ file(MAKE_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}/objective)
 if(CMAKE_SYSTEM_PROCESSOR MATCHES "arm*")
     set(ARCHITECTURE "arm64")
 elseif(CMAKE_SYSTEM_PROCESSOR MATCHES "x86_64" OR CMAKE_SYSTEM_PROCESSOR MATCHES "AMD64")
-    set(ARCHITECTURE "AMD64")
+    set(ARCHITECTURE "amd64")
 else()
     set(ARCHITECTURE "${CMAKE_SYSTEM_PROCESSOR}")
 endif()
@@ -39,11 +39,11 @@ message("Система пользователя: ${FULL_SYSTEM_NAME}")
 
 
 
-if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu") 
+if(${FULL_SYSTEM_NAME} STREQUAL "amd64-windows-gnu") 
 
     # Загружаем .o файл с точкой входа для Windows
-    set(main_file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/libtest_main.lib")
-    set(main_destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/libtest_main.lib")
+    set(main_file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/main.obj")
+    set(main_destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/main.obj")
 
     # checking if required main_binary file exists otherwise we download it from git
     if(EXISTS ${main_destination})
@@ -70,18 +70,18 @@ else()
 endif()  
 
 
-if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
+if(${FULL_SYSTEM_NAME} STREQUAL "amd64-windows-gnu")
 
     foreach(variable ${variables_list})
 
     string(FIND ${variable} "_stdout_stderr" substring_index)
 
         if(NOT ${substring_index} EQUAL -1)
-            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.lib")
-            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.lib")
+            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.obj")
+            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.obj")
         else()
-            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.lib")
-            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.lib")
+            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.obj")
+            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.obj")
         endif()
 
     message(${file_url})
@@ -120,7 +120,7 @@ if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
 
 else()
 
-    # Загружем тестовый .o файлы
+    # Загружем тестовые .o файлы
     foreach(variable ${variables_list})
 
     string(FIND ${variable} "_stdout_stderr" substring_index)
@@ -232,12 +232,12 @@ foreach(binary IN LISTS download_binaries)
 
     get_filename_component(executable_name ${binary} NAME_WE)
 
-    Checking whether the current .o file is necessary for linking libraries
-    if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
+#    Checking whether the current .o file is necessary for linking libraries
+    if(${FULL_SYSTEM_NAME} STREQUAL "amd64-windows-gnu")
 
         message("Ищем файл для: ${FULL_SYSTEM_NAME}")
 
-        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.lib")
+        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.obj")
             find_package(Catch2 CONFIG REQUIRED)
 
             if(NOT Catch2_FOUND)
