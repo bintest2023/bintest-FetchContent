@@ -255,11 +255,11 @@ foreach(binary IN LISTS download_binaries)
     #         endif()
     #     endif()
         
-    endif()
+    # endif()
     
     add_executable(binary_executable${index} ${binary})
-    target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
-    # target_link_libraries(binary_executable${index} ${unique_target_names})
+    # target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
+     target_link_libraries(binary_executable${index} ${unique_target_names})
 
     # Увеличиваем индекс
     math(EXPR index "${index} + 1")
