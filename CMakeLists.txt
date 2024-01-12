@@ -42,8 +42,8 @@ message("Система пользователя: ${FULL_SYSTEM_NAME}")
 if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu") 
 
     # Загружаем .o файл с точкой входа для Windows
-    set(main_file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/main.cpp.lib")
-    set(main_destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/main.cpp.lib")
+    set(main_file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/libtest_main.lib")
+    set(main_destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/libtest_main.lib")
 
     # checking if required main_binary file exists otherwise we download it from git
     if(EXISTS ${main_destination})
@@ -77,11 +77,11 @@ if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
     string(FIND ${variable} "_stdout_stderr" substring_index)
 
         if(NOT ${substring_index} EQUAL -1)
-            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.cpp.o")
-            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.cpp.o")
+            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.lib")
+            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.lib")
         else()
-            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.cpp.o")
-            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.cpp.o")
+            set(file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/${variable}_test.lib")
+            set(destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/${variable}_test.lib")
         endif()
 
     message(${file_url})
@@ -235,7 +235,7 @@ foreach(binary IN LISTS download_binaries)
     # Checking whether the current .o file is necessary for linking libraries
     if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
 
-        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
+        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.lib")
             find_package(Catch2 CONFIG REQUIRED)
 
             if(NOT Catch2_FOUND)
@@ -245,7 +245,7 @@ foreach(binary IN LISTS download_binaries)
 
     else()
 
-        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.lib")
+        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
             find_package(Catch2 CONFIG REQUIRED)
 
             if(NOT Catch2_FOUND)
