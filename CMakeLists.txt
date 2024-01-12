@@ -233,30 +233,31 @@ foreach(binary IN LISTS download_binaries)
     get_filename_component(executable_name ${binary} NAME_WE)
 
     # Checking whether the current .o file is necessary for linking libraries
-    if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
+    # if(${FULL_SYSTEM_NAME} STREQUAL "AMD64-windows-gnu")
 
-        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.lib")
-            find_package(Catch2 CONFIG REQUIRED)
+    #     if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.lib")
+    #         find_package(Catch2 CONFIG REQUIRED)
 
-            if(NOT Catch2_FOUND)
-                message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
-            endif()
-        endif()
+    #         if(NOT Catch2_FOUND)
+    #             message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
+    #         endif()
+    #     endif()
 
-    else()
+    # else()
 
-        if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
-            find_package(Catch2 CONFIG REQUIRED)
+    #     if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
+    #         find_package(Catch2 CONFIG REQUIRED)
 
-            if(NOT Catch2_FOUND)
-                message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
-            endif()
-        endif()
+    #         if(NOT Catch2_FOUND)
+    #             message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
+    #         endif()
+    #     endif()
         
-    endif()
+    # endif()
     
     add_executable(binary_executable${index} ${binary})
-    target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
+    # target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
+    target_link_libraries(binary_executable${index} ${unique_target_names})
 
     # Увеличиваем индекс
     math(EXPR index "${index} + 1")
