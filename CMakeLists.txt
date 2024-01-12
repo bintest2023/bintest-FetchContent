@@ -38,6 +38,19 @@ set(FULL_SYSTEM_NAME "${ARCHITECTURE}-${OPERATING_SYSTEM}")
  message("Система пользователя: ${FULL_SYSTEM_NAME}")
 
 
+# Загружаем .o файл с точкой входа
+set(main_file_url "${bintest}/test-binaries/raw/main/${FULL_SYSTEM_NAME}/main.cpp.o")
+set(main_destination "${CMAKE_CURRENT_SOURCE_DIR}/objective/main.cpp.o")
+
+# checking if required main_binary file exists otherwise we download it from git
+if(EXISTS ${main_destination})
+    message("-- ${binary_file} has been already downloaded")
+else()
+    file(DOWNLOAD ${main_file_url} ${main_destination} STATUS status)
+    list(APPEND download_binaries ${main_destination})
+endif()
+
+# Загружем тестовый .o файлы
 foreach(variable ${variables_list})
 
 string(FIND ${variable} "_stdout_stderr" substring_index)
@@ -117,6 +130,7 @@ list(REMOVE_DUPLICATES unique_target_names)
 
 # endforeach()
 
+# Do executable every binary file
 foreach(binary IN LISTS download_binaries)
 
     get_filename_component(executable_name ${binary} NAME_WE)
