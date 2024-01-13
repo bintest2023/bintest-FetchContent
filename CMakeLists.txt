@@ -100,21 +100,38 @@ if(${FULL_SYSTEM_NAME} STREQUAL "amd64-windows-gnu")
     set(unique_target_names)
 
     foreach(variable ${variables_list})
+
         # Find the index of the first occurrence of the substring "rational"
         string(FIND ${variable} "rational" substring_index)
 
         # Find the index of the first occurrence of the substring "array"
         string(FIND ${variable} "arrayd" substring_index_arrayd)
 
+        # Find the index of the first occurrence of the substring "array"
+        string(FIND ${variable} "matrixs" substring_index_arrayd)
+
+        # Find the index of the first occurrence of the substring "array"
+        string(FIND ${variable} "arrayt" substring_index_arrayd)
+
         # If a substring is found and has not yet been added to the unique list, add it
-        if(NOT ${substring_index} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";${variable};")
+        if(NOT ${substring_index} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";rational;")
             list(APPEND unique_target_names "rational")
         endif()
 
         # If the substring "arrayd" is found and has not yet been added to the unique list, add it
         if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";arrayd;")
         list(APPEND unique_target_names "arrayd")
-    endif()
+        endif()
+
+        # If the substring "arrayd" is found and has not yet been added to the unique list, add it
+        if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";matrixs;")
+        list(APPEND unique_target_names "matrixs")
+        endif()
+
+        # If the substring "arrayd" is found and has not yet been added to the unique list, add it
+        if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";arrayt;")
+        list(APPEND unique_target_names "arrayt")
+        endif()
 
     endforeach()
 
@@ -149,21 +166,38 @@ else()
     set(unique_target_names)
 
     foreach(variable ${variables_list})
+    
         # Find the index of the first occurrence of the substring "rational"
         string(FIND ${variable} "rational" substring_index)
 
         # Find the index of the first occurrence of the substring "array"
         string(FIND ${variable} "arrayd" substring_index_arrayd)
 
+        # Find the index of the first occurrence of the substring "array"
+        string(FIND ${variable} "matrixs" substring_index_arrayd)
+
+        # Find the index of the first occurrence of the substring "array"
+        string(FIND ${variable} "arrayt" substring_index_arrayd)
+
         # If a substring is found and has not yet been added to the unique list, add it
-        if(NOT ${substring_index} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";${variable};")
+        if(NOT ${substring_index} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";rational;")
             list(APPEND unique_target_names "rational")
         endif()
 
         # If the substring "arrayd" is found and has not yet been added to the unique list, add it
         if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";arrayd;")
         list(APPEND unique_target_names "arrayd")
-    endif()
+        endif()
+
+        # If the substring "arrayd" is found and has not yet been added to the unique list, add it
+        if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";matrixs;")
+        list(APPEND unique_target_names "matrixs")
+        endif()
+
+        # If the substring "arrayd" is found and has not yet been added to the unique list, add it
+        if(NOT ${substring_index_arrayd} EQUAL -1 AND NOT ";${unique_target_names};" MATCHES ";arrayt;")
+        list(APPEND unique_target_names "arrayt")
+        endif()
 
     endforeach()
 
