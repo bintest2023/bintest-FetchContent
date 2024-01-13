@@ -206,55 +206,6 @@ endif()
 # Remove duplicates in unique_target_names
 list(REMOVE_DUPLICATES unique_target_names)
 
-# Do executable every binary file
-# foreach(index RANGE 0 ${CMAKE_LIST_LENGTH} 1)
-
-#     list(GET download_binaries ${index} binary)
-#     get_filename_component(executable_name ${binary} NAME_WE)
-
-#     # Checking whether the current .o file is necessary for linking libraries
-    
-#     if(${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o") 
-
-#         find_package(Catch2 CONFIG REQUIRED)
-
-#         if(NOT Catch2_FOUND)
-
-#                 message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
-
-#         endif()
-
-#         add_executable(binary_executable${index} ${binary})
-#         target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names} )
-
-#     else()
-
-#         add_executable(binary_executable${index} ${binary})
-#         target_link_libraries(binary_executable${index} ${unique_target_names})
-
-#     endif()
-
-# endforeach()
-
-# Do executable every binary file
-# foreach(binary IN LISTS download_binaries)
-
-#     get_filename_component(executable_name ${binary} NAME_WE)
-
-#     # Checking whether the current .o file is necessary for linking libraries
-#     if(NOT ${binary} STREQUAL "${CMAKE_CURRENT_SOURCE_DIR}/objective/rational_stdout_stderr_test.cpp.o")
-#         find_package(Catch2 CONFIG REQUIRED)
-
-#         if(NOT Catch2_FOUND)
-#             message(FATAL_ERROR "Package 'Catch2' not found. Please install it using 'vcpkg install Catch2'")
-#         endif()
-#     endif()
-
-#     add_executable(binary_executable${index} ${binary})
-#     target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
-
-# endforeach()
-
 # Получаем длину списка download_binaries
 list(LENGTH download_binaries num_binaries)
 
@@ -293,7 +244,7 @@ foreach(binary IN LISTS download_binaries)
     
     add_executable(binary_executable${index} ${binary})
      target_link_libraries(binary_executable${index} PRIVATE Catch2::Catch2 Catch2::Catch2WithMain ${unique_target_names})
-    #  target_link_libraries(binary_executable${index} ${unique_target_names})
+    # target_link_libraries(binary_executable${index} ${unique_target_names})
 
     # Увеличиваем индекс
     math(EXPR index "${index} + 1")
