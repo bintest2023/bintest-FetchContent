@@ -18,7 +18,7 @@ include(${CMAKE_SOURCE_DIR}/build/_deps/bintest-fetchcontent-src/CmakeLists.txt)
 
 
 # List if tests
-# rational arrayD rational_stdout_stderr
+# rational arrayD 
 ```
 
 2) Instead of "..." add the names of the tests you want to install.
@@ -33,14 +33,6 @@ List of tests
 
 
 3) Check if the targets are set.
-
-WARNING
-
-The name of the targets must match the name of the tests.
-
-If you want user rational_stdout_stderr test, you should to download Catch2 lib in vcpkg pakage manager for C++.
-You should have Catch2 lib with vcpkg to use rational_stdout_stderr.
-
 
 
 
