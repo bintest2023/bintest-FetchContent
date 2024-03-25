@@ -8,7 +8,7 @@ include(FetchContent)
 FetchContent_Declare(
   bintest-FetchContent
   GIT_REPOSITORY https://github.com/bintest2023/bintest-FetchContent.git
-  GIT_TAG        v1.2.23
+  GIT_TAG        v1.2.27
 )
   FetchContent_Populate(bintest-FetchContent)
 
